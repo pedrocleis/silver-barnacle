@@ -23,6 +23,19 @@ public class tela extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    public int checkMinMax (double input) {
+        int output;
+        if (Math.round(input) > 255) {
+            output = 255;
+        } else if (Math.round(input) < 0) {
+            output = 0;
+        } else {
+            output = (int) Math.round(input);
+        }
+
+         return output;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,6 +50,7 @@ public class tela extends javax.swing.JFrame {
         btnNegativoR = new javax.swing.JButton();
         btnNegativoG = new javax.swing.JButton();
         btnNegativoB = new javax.swing.JButton();
+        btnNegativoY = new javax.swing.JButton();
         btnBandaR = new javax.swing.JButton();
         btnBandaG = new javax.swing.JButton();
         btnBandaB = new javax.swing.JButton();
@@ -49,6 +63,7 @@ public class tela extends javax.swing.JFrame {
         btnNegativoR.setText("Negativo R");
         btnNegativoG.setText("Negativo G");
         btnNegativoB.setText("Negativo B");
+        btnNegativoY.setText("Negativo Y");
         btnBandaR.setText("Banda R");
         btnBandaG.setText("Banda G");
         btnBandaB.setText("Banda B");
@@ -71,6 +86,11 @@ public class tela extends javax.swing.JFrame {
         btnNegativoB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNegativoBActionPerformed(evt);
+            }
+        });
+        btnNegativoY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNegativoYActionPerformed(evt);
             }
         });
         btnBandaR.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +132,7 @@ public class tela extends javax.swing.JFrame {
                         .addComponent(btnNegativoR)
                         .addComponent(btnNegativoG)
                         .addComponent(btnNegativoB)
+                        .addComponent(btnNegativoY)
                         .addComponent(btnBandaR)
                         .addComponent(btnBandaG)
                         .addComponent(btnBandaB))
@@ -131,6 +152,7 @@ public class tela extends javax.swing.JFrame {
                         .addComponent(btnNegativoR)
                         .addComponent(btnNegativoG)
                         .addComponent(btnNegativoB)
+                        .addComponent(btnNegativoY)
                         .addComponent(btnBandaR)
                         .addComponent(btnBandaG)
                         .addComponent(btnBandaB)))
@@ -171,6 +193,52 @@ public class tela extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnTrocarFotoActionPerformed
+    private void btnNegativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
+
+        BufferedImage img = null;
+        File input = null;
+        File output = null;
+        File maskText = null;
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i, j);
+
+                int r = 255 - (pixel >> 16) & 0xff;
+                int g = 255 - (pixel >> 8) & 0xff;
+                int b = 255 - pixel & 0xff;
+
+                pixel = (r << 16) | (g << 8) | b;
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        try {
+            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
+
+            foto.repaint();
+
+            this.revalidate();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void btnNegativoRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
         
@@ -224,53 +292,6 @@ public class tela extends javax.swing.JFrame {
 
     //GEN-FIRST:event_btnNegativoActionPerformed
 
-
-    private void btnNegativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
-
-        try {
-            input = this.arquivo;
-            img = ImageIO.read(input);
-            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        int width = img.getWidth();
-        int height = img.getHeight();
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                int pixel = img.getRGB(i, j);
-
-                int r = 255 - (pixel >> 16) & 0xff;
-                int g = 255 - (pixel >> 8) & 0xff;
-                int b = 255 - pixel & 0xff;
-
-                pixel = (r << 16) | (g << 8) | b;
-                img.setRGB(i, j, pixel);
-            }
-        }
-
-        try {
-            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
-            ImageIO.write(img, "jpg", output);
-            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
-            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
-
-            foto.repaint();
-
-            this.revalidate();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private void btnNegativoGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
 
@@ -366,6 +387,63 @@ public class tela extends javax.swing.JFrame {
 
     }
 
+    private void btnNegativoYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
+
+        BufferedImage img = null;
+        File input = null;
+        File output = null;
+        File maskText = null;
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i, j);
+
+                int r = (pixel >> 16) & 0xff;
+                int g = (pixel >> 8) & 0xff;
+                int b = pixel & 0xff;
+
+                double valorY = 0.299*r + 0.587*g + 0.114*b;
+                double valorI = 0.596*r + 0.274*g + 0.322*b;
+                double valorQ = 0.211*r + 0.523*g + 0.312*b;
+
+                double negativoY = 255 - valorY;
+
+                r = checkMinMax(negativoY + 0.954*valorI + 0.621*valorQ);
+                g = checkMinMax(negativoY - 0.272*valorI - 0.647*valorQ);
+                b = checkMinMax(negativoY - 1.106*valorI + 1.703*valorQ);
+
+                pixel = (r << 16) | (g << 8) | b;
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        try {
+            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
+
+            foto.repaint();
+
+            this.revalidate();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void btnBandaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
 
         BufferedImage img = null;
@@ -427,6 +505,8 @@ public class tela extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
         int width = img.getWidth();
         int height = img.getHeight();
@@ -549,6 +629,7 @@ public class tela extends javax.swing.JFrame {
     private javax.swing.JButton btnNegativoR;
     private javax.swing.JButton btnNegativoG;
     private javax.swing.JButton btnNegativoB;
+    private javax.swing.JButton btnNegativoY;
     private javax.swing.JButton btnBandaR;
     private javax.swing.JButton btnBandaG;
     private javax.swing.JButton btnBandaB;
