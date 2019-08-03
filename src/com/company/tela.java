@@ -414,12 +414,12 @@ public class tela extends javax.swing.JFrame {
                 int b = pixel & 0xff;
 
                 double valorY = 0.299*r + 0.587*g + 0.114*b;
-                double valorI = 0.596*r + 0.274*g + 0.322*b;
-                double valorQ = 0.211*r + 0.523*g + 0.312*b;
+                double valorI = 0.596*r - 0.274*g - 0.322*b;
+                double valorQ = 0.211*r - 0.523*g + 0.312*b;
 
                 double negativoY = 255 - valorY;
 
-                r = checkMinMax(negativoY + 0.954*valorI + 0.621*valorQ);
+                r = checkMinMax(negativoY + 0.956*valorI + 0.621*valorQ);
                 g = checkMinMax(negativoY - 0.272*valorI - 0.647*valorQ);
                 b = checkMinMax(negativoY - 1.106*valorI + 1.703*valorQ);
 
