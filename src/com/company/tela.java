@@ -191,8 +191,18 @@ public class tela extends javax.swing.JFrame {
         valorContrBrilho.setText("Insira um valor real positivo");
 
         btnFiltroMedia.setText("Filtro de Média");
+        btnFiltroMedia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroMediaActionPerformed(evt);
+            }
+        });
 
         btnFiltroSobel.setText("Filtro de Sobel");
+        btnFiltroSobel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroSobelActionPerformed(evt);
+            }
+        });
 
         btnFiltroMediana.setText("Filtro de Mediana");
         btnFiltroMediana.addActionListener(new java.awt.event.ActionListener() {
@@ -947,6 +957,10 @@ public class tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnControleBrilhoActionPerformed
 
     private void btnFiltroMedianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroMedianaActionPerformed
+        
+    }//GEN-LAST:event_btnFiltroMedianaActionPerformed
+
+    private void btnFiltroMediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroMediaActionPerformed
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -1067,7 +1081,11 @@ public class tela extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnFiltroMedianaActionPerformed
+    }//GEN-LAST:event_btnFiltroMediaActionPerformed
+
+    private void btnFiltroSobelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroSobelActionPerformed
+        
+    }//GEN-LAST:event_btnFiltroSobelActionPerformed
 
     /**
      * @param args the command line arguments

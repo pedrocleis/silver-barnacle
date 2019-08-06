@@ -290,11 +290,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Filtro de M&#xe9;dia"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFiltroMediaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnFiltroSobel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Filtro de Sobel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFiltroSobelActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnFiltroMediana">
           <Properties>
