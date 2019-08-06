@@ -1,22 +1,36 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pdi;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author Naiara
+ */
 public class tela extends javax.swing.JFrame {
     
     File arquivo;
+    BufferedImage img = null;
+    File input = null;
+    File output = null;
+    File maskText = null;
 
     /**
      * Creates new form tela
      */
-
     public tela() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -35,7 +49,7 @@ public class tela extends javax.swing.JFrame {
 
          return output;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,66 +60,29 @@ public class tela extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnNegativo = new javax.swing.JButton();
-        btnNegativoR = new javax.swing.JButton();
-        btnNegativoG = new javax.swing.JButton();
-        btnNegativoB = new javax.swing.JButton();
-        btnNegativoY = new javax.swing.JButton();
-        btnBandaR = new javax.swing.JButton();
-        btnBandaG = new javax.swing.JButton();
-        btnBandaB = new javax.swing.JButton();
+        btnNegativoRGB = new javax.swing.JButton();
         foto = new javax.swing.JLabel();
         btnTrocarFoto = new javax.swing.JButton();
+        btnBandaRcor = new javax.swing.JButton();
+        btnBandaGcor = new javax.swing.JButton();
+        btnBandaBcor = new javax.swing.JButton();
+        btnConversaoRGB_YIQ_RGB = new javax.swing.JButton();
+        btnNegativoY = new javax.swing.JButton();
+        btnBandaRmono = new javax.swing.JButton();
+        BandaRneg = new javax.swing.JButton();
+        BandaGneg = new javax.swing.JButton();
+        BandaBneg = new javax.swing.JButton();
+        btnBandaGmono = new javax.swing.JButton();
+        btnBandaBmono = new javax.swing.JButton();
+        btnControleBrilho = new javax.swing.JButton();
+        valorContrBrilho = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnNegativo.setText("Negativo RGB");
-        btnNegativoR.setText("Negativo R");
-        btnNegativoG.setText("Negativo G");
-        btnNegativoB.setText("Negativo B");
-        btnNegativoY.setText("Negativo Y");
-        btnBandaR.setText("Banda R");
-        btnBandaG.setText("Banda G");
-        btnBandaB.setText("Banda B");
-
-        btnNegativo.addActionListener(new java.awt.event.ActionListener() {
+        btnNegativoRGB.setText("Negativo RGB");
+        btnNegativoRGB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNegativoActionPerformed(evt);
-            }
-        });
-        btnNegativoR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNegativoRActionPerformed(evt);
-            }
-        });
-        btnNegativoG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNegativoGActionPerformed(evt);
-            }
-        });
-        btnNegativoB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNegativoBActionPerformed(evt);
-            }
-        });
-        btnNegativoY.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNegativoYActionPerformed(evt);
-            }
-        });
-        btnBandaR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBandaRActionPerformed(evt);
-            }
-        });
-        btnBandaG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBandaGActionPerformed(evt);
-            }
-        });
-        btnBandaB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBandaBActionPerformed(evt);
+                btnNegativoRGBActionPerformed(evt);
             }
         });
 
@@ -118,47 +95,176 @@ public class tela extends javax.swing.JFrame {
             }
         });
 
+        btnBandaRcor.setText("Banda R colorida");
+        btnBandaRcor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBandaRcorActionPerformed(evt);
+            }
+        });
+
+        btnBandaGcor.setText("Banda G colorida");
+        btnBandaGcor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBandaGcorActionPerformed(evt);
+            }
+        });
+
+        btnBandaBcor.setText("Banda B colorida");
+        btnBandaBcor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBandaBcorActionPerformed(evt);
+            }
+        });
+
+        btnConversaoRGB_YIQ_RGB.setText("Conversão RGB-YIQ-RGB");
+        btnConversaoRGB_YIQ_RGB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConversaoRGB_YIQ_RGBActionPerformed(evt);
+            }
+        });
+
+        btnNegativoY.setText("Negativo em Y");
+        btnNegativoY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNegativoYActionPerformed(evt);
+            }
+        });
+
+        btnBandaRmono.setText("Banda R monocromática");
+        btnBandaRmono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBandaRmonoActionPerformed(evt);
+            }
+        });
+
+        BandaRneg.setText("Banda R Negativo");
+        BandaRneg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BandaRnegActionPerformed(evt);
+            }
+        });
+
+        BandaGneg.setText("Banda G Negativo");
+        BandaGneg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BandaGnegActionPerformed(evt);
+            }
+        });
+
+        BandaBneg.setText("Banda B Negativo");
+        BandaBneg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BandaBnegActionPerformed(evt);
+            }
+        });
+
+        btnBandaGmono.setText("Banda G monocromática");
+        btnBandaGmono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBandaGmonoActionPerformed(evt);
+            }
+        });
+
+        btnBandaBmono.setText("Banda B monocromática");
+        btnBandaBmono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBandaBmonoActionPerformed(evt);
+            }
+        });
+
+        btnControleBrilho.setText("Controle de Brilho");
+        btnControleBrilho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnControleBrilhoActionPerformed(evt);
+            }
+        });
+
+        valorContrBrilho.setText("Insira um valor real positivo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(btnTrocarFoto)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(btnNegativo)
-                        .addComponent(btnNegativoR)
-                        .addComponent(btnNegativoG)
-                        .addComponent(btnNegativoB)
+                        .addComponent(btnNegativoRGB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnNegativoY)
-                        .addComponent(btnBandaR)
-                        .addComponent(btnBandaG)
-                        .addComponent(btnBandaB))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnConversaoRGB_YIQ_RGB))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(btnTrocarFoto)))
-                .addContainerGap(259, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBandaRmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBandaGmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBandaBmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(valorContrBrilho))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnBandaRcor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BandaRneg))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnBandaGcor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BandaGneg))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(btnBandaBcor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BandaBneg))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnControleBrilho)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(btnNegativo)
-                        .addComponent(btnNegativoR)
-                        .addComponent(btnNegativoG)
-                        .addComponent(btnNegativoB)
-                        .addComponent(btnNegativoY)
-                        .addComponent(btnBandaR)
-                        .addComponent(btnBandaG)
-                        .addComponent(btnBandaB)))
-                .addGap(18, 18, 18)
-                .addComponent(btnTrocarFoto)
-                .addGap(0, 29, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNegativoRGB)
+                            .addComponent(btnNegativoY)
+                            .addComponent(btnConversaoRGB_YIQ_RGB))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBandaRmono)
+                            .addComponent(btnBandaRcor)
+                            .addComponent(BandaRneg))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnBandaGmono)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBandaBmono))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(BandaGneg)
+                                    .addComponent(btnBandaGcor))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(BandaBneg)
+                                    .addComponent(btnBandaBcor))))
+                        .addGap(13, 13, 13)
+                        .addComponent(valorContrBrilho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnControleBrilho))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTrocarFoto)))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,17 +275,14 @@ public class tela extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTrocarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrocarFotoActionPerformed
-        JFileChooser fc = new JFileChooser(".");
+        JFileChooser fc = new JFileChooser("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens");
         
         fc.showOpenDialog(jPanel1);
         this.arquivo = fc.getSelectedFile();
@@ -194,65 +297,13 @@ public class tela extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnTrocarFotoActionPerformed
 
-    private void btnNegativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
-
+    private void btnNegativoRGBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoRGBActionPerformed
+        
+       
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        int width = img.getWidth();
-        int height = img.getHeight();
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                int pixel = img.getRGB(i, j);
-
-                int r = 255 - (pixel >> 16) & 0xff;
-                int g = 255 - (pixel >> 8) & 0xff;
-                int b = 255 - pixel & 0xff;
-
-                pixel = (r << 16) | (g << 8) | b;
-                img.setRGB(i, j, pixel);
-            }
-        }
-
-        try {
-            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
-            ImageIO.write(img, "jpg", output);
-            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
-            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
-
-            foto.repaint();
-
-            this.revalidate();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void btnNegativoRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-        
-        
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
-
-        try {
-            input = this.arquivo;
-            img = ImageIO.read(input);
-            maskText = new File ("C:\\silver-barnacle-master\\img\\mask.txt");
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -265,16 +316,153 @@ public class tela extends javax.swing.JFrame {
                 int pixel = img.getRGB(i,j);
 
                 int r = 255 - (pixel>>16) & 0xff;
-                int g = (pixel>>8) & 0xff;
-                int b = pixel & 0xff;
+                int g = 255 - (pixel>>8) & 0xff;
+                int b = 255 - pixel & 0xff;
 
-                pixel = (r<<16)| (g<<8) | b;
+                pixel = (r<<16) | (g<<8) | b;
                 img.setRGB(i, j, pixel);
             }
         }
 
         try {
-            output = new File ("C:\\silver-barnacle-master\\img\\negativo.jpg");
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
+
+            foto.repaint();
+            
+
+            this.revalidate();
+            //DialogImgProcessada negativoRGB = new DialogImgProcessada(tela.this, true, imagemProcessada);
+            //negativoRGB.setLocationRelativeTo(null);
+            //negativoRGB.setVisible(true);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //System.out.println("asd");
+    }//GEN-LAST:event_btnNegativoRGBActionPerformed
+
+    private void btnBandaRcorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaRcorActionPerformed
+        
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i,j);
+
+                int r = 255 & (pixel>>16) & 0xff;
+                int g = 0 & (pixel>>8) & 0xff;
+                int b = 0 & pixel & 0xff;
+                
+                pixel = (r<<16) | (g<<8) | b;
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        try {
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+        
+            foto.repaint();
+        
+            this.revalidate();
+            //ImageIcon imagemProcessada = new ImageIcon(output.getAbsolutePath());
+            //DialogImgProcessada bandaR = new DialogImgProcessada(tela.this, true, imagemProcessada);
+            //bandaR.setLocationRelativeTo(null);
+            //bandaR.setVisible(true);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnBandaRcorActionPerformed
+
+    private void btnBandaGcorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaGcorActionPerformed
+        
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i,j);
+
+                int r = 0 & (pixel>>16) & 0xff;
+                int g = 255 & (pixel>>8) & 0xff;
+                int b = 0 & pixel & 0xff;
+                                
+                pixel = (r<<16) | (g<<8) | b;
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        try {
+            output = new File("\\Users\\HP\\Desktop\\silver-barnacle-master\\img\\imagemProcessada.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
+
+            foto.repaint();
+
+            this.revalidate();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnBandaGcorActionPerformed
+
+    private void btnBandaBcorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaBcorActionPerformed
+        
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i,j);
+
+                int r = 0 & (pixel>>16) & 0xff;
+                int g = 0 & (pixel>>8) & 0xff;
+                int b = 255 & pixel & 0xff;
+                                
+                pixel = (r<<16) | (g<<8) | b;
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        try {
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -286,26 +474,16 @@ public class tela extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }//GEN-LAST:event_btnBandaBcorActionPerformed
 
-
-        //System.out.println("asd");
-    }//GEN-LAST:event_btnNegativoActionPerformed
-
-    //GEN-FIRST:event_btnNegativoActionPerformed
-
-
-    private void btnNegativoGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
+    private void btnBandaRmonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaRmonoActionPerformed
+        
 
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
-        } catch (IOException e) {
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
             e.printStackTrace();
         }
 
@@ -314,91 +492,65 @@ public class tela extends javax.swing.JFrame {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                int pixel = img.getRGB(i, j);
+                int pixel = img.getRGB(i,j);
 
-                int r = (pixel>>16) & 0xff;
-                int g = 255 - (pixel >> 8) & 0xff;
-                int b = pixel & 0xff;
-
-                pixel = pixel = (r<<16)| (g<<8) | b;
+                int r = 255 & (pixel>>16) & 0xff;
+                int g = 0 & (pixel>>8) & 0xff;
+                int b = 0 & pixel & 0xff;
+                
+                //int x = r/3;
+                //int x = ((r<<16)+0+0)/3;
+                
+                pixel = (r<<16) | (g<<8) | b;                 
+                
                 img.setRGB(i, j, pixel);
             }
         }
 
-        try {
-            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
-            ImageIO.write(img, "jpg", output);
-            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
-            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
+        //BufferedImage colorFrame;
+        BufferedImage grayFrame = 
+        new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+        
+        WritableRaster raster = grayFrame.getRaster();
 
-            foto.repaint();
+        for(int x = 0; x < raster.getWidth(); x++) {
+            for(int y = 0; y < raster.getHeight(); y++){
+                int argb = img.getRGB(x,y);
+                int r = (argb >> 16) & 0xff;
+                int g = (argb >>  8) & 0xff;
+                int b = (argb      ) & 0xff;
 
-            this.revalidate();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void btnNegativoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
-
-        try {
-            input = this.arquivo;
-            img = ImageIO.read(input);
-            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        int width = img.getWidth();
-        int height = img.getHeight();
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                int pixel = img.getRGB(i, j);
-
-                int r = (pixel>>16) & 0xff;
-                int g = (pixel>>8) & 0xff;
-                int b = 255 - pixel & 0xff;
-
-                pixel = (r<<16)| (g<<8) | b;
-                img.setRGB(i, j, pixel);
+                int l = (int) (.299 * r + .587 * g + .114 * b);
+                raster.setSample(x, y, 0, l);
             }
         }
-
+        
         try {
-            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
-            ImageIO.write(img, "jpg", output);
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(grayFrame, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
-            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
-
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+        
             foto.repaint();
-
+        
             this.revalidate();
-
+            //ImageIcon imagemProcessada = new ImageIcon(output.getAbsolutePath());
+            //DialogImgProcessada bandaR = new DialogImgProcessada(tela.this, true, imagemProcessada);
+            //bandaR.setLocationRelativeTo(null);
+            //bandaR.setVisible(true);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }//GEN-LAST:event_btnBandaRmonoActionPerformed
 
-    }
-
-    private void btnNegativoYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
+    private void btnNegativoYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoYActionPerformed
+       
 
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
+            maskText = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -430,7 +582,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
+            output = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -442,20 +594,57 @@ public class tela extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }//GEN-LAST:event_btnNegativoYActionPerformed
 
-    }
-
-    private void btnBandaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
+    private void BandaRnegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BandaRnegActionPerformed
+        
 
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i,j);
+
+                int r = 255 - (pixel>>16) & 0xff;
+                int g = (pixel>>8) & 0xff;
+                int b = pixel & 0xff;
+
+                pixel = (r<<16)| (g<<8) | b;
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        try {
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+        
+            foto.repaint();
+        
+            this.revalidate();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BandaRnegActionPerformed
+
+    private void btnConversaoRGB_YIQ_RGBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConversaoRGB_YIQ_RGBActionPerformed
+       
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -468,104 +657,16 @@ public class tela extends javax.swing.JFrame {
                 int pixel = img.getRGB(i, j);
 
                 int r = (pixel >> 16) & 0xff;
-                int g = 0;
-                int b = 0;
-
-                pixel = (r<<16) | (g << 8) | b;
-                img.setRGB(i, j, pixel);
-            }
-        }
-
-        try {
-            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
-            ImageIO.write(img, "jpg", output);
-            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
-            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
-
-            foto.repaint();
-
-            this.revalidate();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void btnBandaGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
-
-        try {
-            input = this.arquivo;
-            img = ImageIO.read(input);
-            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-        int width = img.getWidth();
-        int height = img.getHeight();
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                int pixel = img.getRGB(i, j);
-
-                int r = 0;
                 int g = (pixel >> 8) & 0xff;
-                int b = 0;
-
-                pixel = (r << 16) | (g<<8) | b;
-                img.setRGB(i, j, pixel);
-            }
-        }
-
-        try {
-            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
-            ImageIO.write(img, "jpg", output);
-            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
-            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
-
-            foto.repaint();
-
-            this.revalidate();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void btnBandaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
-
-        BufferedImage img = null;
-        File input = null;
-        File output = null;
-        File maskText = null;
-
-        try {
-            input = this.arquivo;
-            img = ImageIO.read(input);
-            maskText = new File("C:\\silver-barnacle-master\\img\\mask.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        int width = img.getWidth();
-        int height = img.getHeight();
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                int pixel = img.getRGB(i, j);
-
-                int r = 0;
-                int g = 0;
                 int b = pixel & 0xff;
+
+                double valorY = 0.299*r + 0.587*g + 0.114*b;
+                double valorI = 0.596*r - 0.274*g - 0.322*b;
+                double valorQ = 0.211*r - 0.523*g + 0.312*b;              
+
+                r = checkMinMax(1.000*valorY + 0.956*valorI + 0.621*valorQ);
+                g = checkMinMax(1.000*valorY - 0.272*valorI - 0.647*valorQ);
+                b = checkMinMax(1.000*valorY - 1.106*valorI + 1.703*valorQ);
 
                 pixel = (r << 16) | (g << 8) | b;
                 img.setRGB(i, j, pixel);
@@ -573,7 +674,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File("C:\\silver-barnacle-master\\img\\negativo.jpg");
+            output = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -585,10 +686,281 @@ public class tela extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }//GEN-LAST:event_btnConversaoRGB_YIQ_RGBActionPerformed
 
-    }
-    //System.out.println("asd");
+    private void BandaGnegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BandaGnegActionPerformed
+        
 
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i,j);
+
+                int r = (pixel>>16) & 0xff;
+                int g = 255 - (pixel>>8) & 0xff;
+                int b = pixel & 0xff;
+
+                pixel = (r<<16)| (g<<8) | b;
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        try {
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+        
+            foto.repaint();
+        
+            this.revalidate();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BandaGnegActionPerformed
+
+    private void BandaBnegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BandaBnegActionPerformed
+       
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i,j);
+
+                int r = (pixel>>16) & 0xff;
+                int g = (pixel>>8) & 0xff;
+                int b = 255 - pixel & 0xff;
+
+                pixel = (r<<16)| (g<<8) | b;
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        try {
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+        
+            foto.repaint();
+        
+            this.revalidate();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BandaBnegActionPerformed
+
+    private void btnBandaGmonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaGmonoActionPerformed
+        
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i,j);
+
+                int r = 0 & (pixel>>16) & 0xff;
+                int g = 255 & (pixel>>8) & 0xff;
+                int b = 0 & pixel & 0xff;
+                
+                //int x = r/3;
+                //int x = ((r<<16)+0+0)/3;
+                
+                pixel = (r<<16) | (g<<8) | b;                 
+                
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        //BufferedImage colorFrame;
+        BufferedImage grayFrame = 
+        new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+        
+        WritableRaster raster = grayFrame.getRaster();
+
+        for(int x = 0; x < raster.getWidth(); x++) {
+            for(int y = 0; y < raster.getHeight(); y++){
+                int argb = img.getRGB(x,y);
+                int r = (argb >> 16) & 0xff;
+                int g = (argb >>  8) & 0xff;
+                int b = (argb      ) & 0xff;
+
+                int l = (int) (.299 * r + .587 * g + .114 * b);
+                raster.setSample(x, y, 0, l);
+            }
+        }
+        
+        try {
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(grayFrame, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+        
+            foto.repaint();
+        
+            this.revalidate();
+            //ImageIcon imagemProcessada = new ImageIcon(output.getAbsolutePath());
+            //DialogImgProcessada bandaR = new DialogImgProcessada(tela.this, true, imagemProcessada);
+            //bandaR.setLocationRelativeTo(null);
+            //bandaR.setVisible(true);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnBandaGmonoActionPerformed
+
+    private void btnBandaBmonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaBmonoActionPerformed
+        
+
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = img.getRGB(i,j);
+
+                int r = 0 & (pixel>>16) & 0xff;
+                int g = 0 & (pixel>>8) & 0xff;
+                int b = 255 & pixel & 0xff;
+                
+                //int x = r/3;
+                //int x = ((r<<16)+0+0)/3;
+                
+                pixel = (r<<16) | (g<<8) | b;
+                
+                img.setRGB(i, j, pixel);
+            }
+        }
+
+        //BufferedImage colorFrame;
+        BufferedImage grayFrame = 
+        new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+        
+        WritableRaster raster = grayFrame.getRaster();
+
+        for(int x = 0; x < raster.getWidth(); x++) {
+            for(int y = 0; y < raster.getHeight(); y++){
+                int argb = img.getRGB(x,y);
+                int r = (argb >> 16) & 0xff;
+                int g = (argb >>  8) & 0xff;
+                int b = (argb      ) & 0xff;
+
+                int l = (int) (.299 * r + .587 * g + .114 * b);
+                raster.setSample(x, y, 0, l);
+            }
+        }
+        
+        try {
+            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(grayFrame, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+        
+            foto.repaint();
+        
+            this.revalidate();
+            //ImageIcon imagemProcessada = new ImageIcon(output.getAbsolutePath());
+            //DialogImgProcessada bandaR = new DialogImgProcessada(tela.this, true, imagemProcessada);
+            //bandaR.setLocationRelativeTo(null);
+            //bandaR.setVisible(true);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnBandaBmonoActionPerformed
+
+    private void btnControleBrilhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControleBrilhoActionPerformed
+        
+        
+        float c = Float.parseFloat(valorContrBrilho.getText());
+        
+        if(c < 0){
+            JOptionPane.showMessageDialog(null, "O valor deve ser positivo!");
+        }else{
+            try {
+                //input = this.arquivo;
+                input = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+                //ImageIO.write(img, "jpg", input);
+                img = ImageIO.read(input);
+                maskText = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int width = img.getWidth();
+            int height = img.getHeight();
+
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    int pixel = img.getRGB(i, j);
+
+                    int r = (pixel >> 16) & 0xff;
+                    int g = (pixel >> 8) & 0xff;
+                    int b = pixel & 0xff;                      
+
+                    r = checkMinMax(r*c);
+                    g = checkMinMax(g*c);
+                    b = checkMinMax(b*c);
+
+                    pixel = (r << 16) | (g << 8) | b;
+                    img.setRGB(i, j, pixel);
+                }
+            }
+
+            try {
+                output = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+                ImageIO.write(img, "jpg", output);
+                ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+                foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
+
+                foto.repaint();
+
+                this.revalidate();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btnControleBrilhoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -626,16 +998,22 @@ public class tela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNegativo;
-    private javax.swing.JButton btnNegativoR;
-    private javax.swing.JButton btnNegativoG;
-    private javax.swing.JButton btnNegativoB;
+    private javax.swing.JButton BandaBneg;
+    private javax.swing.JButton BandaGneg;
+    private javax.swing.JButton BandaRneg;
+    private javax.swing.JButton btnBandaBcor;
+    private javax.swing.JButton btnBandaBmono;
+    private javax.swing.JButton btnBandaGcor;
+    private javax.swing.JButton btnBandaGmono;
+    private javax.swing.JButton btnBandaRcor;
+    private javax.swing.JButton btnBandaRmono;
+    private javax.swing.JButton btnControleBrilho;
+    private javax.swing.JButton btnConversaoRGB_YIQ_RGB;
+    private javax.swing.JButton btnNegativoRGB;
     private javax.swing.JButton btnNegativoY;
-    private javax.swing.JButton btnBandaR;
-    private javax.swing.JButton btnBandaG;
-    private javax.swing.JButton btnBandaB;
     private javax.swing.JButton btnTrocarFoto;
     private javax.swing.JLabel foto;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField valorContrBrilho;
     // End of variables declaration//GEN-END:variables
 }
