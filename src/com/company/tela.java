@@ -975,26 +975,84 @@ public class tela extends javax.swing.JFrame {
         int width = img.getWidth();
         int height = img.getHeight();
 
-        int maskWidth = list.get(0);
-        int maskHeight = list.get(0);
+        int size = list.get(0);
+        double multSize = 1/((double)size * size);
+//        System.out.println(1/9.0);
+//        System.out.println(size * size);
+//        System.out.println(multSize);
         
-       System.out.println(list.get(0));
-        
+//        System.out.println(list.get(0));
+        int[][][] midImage = new int[3][width][height];
+        int[][][] dstImage = new int[3][width][height];
+
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                
-                int pixel = img.getRGB(i,j);
+                midImage[0][i][j] = img.getRGB(i,j) >> 16 & 0xff;
+//                System.out.println(midImage[0][i][j]);
+                midImage[1][i][j] = img.getRGB(i,j) >> 8 & 0xff;
+//                System.out.println(midImage[1][i][j]);
+                midImage[2][i][j] = img.getRGB(i,j) & 0xff;
+//                System.out.println(midImage[2][i][j]);
+//                System.out.println(midImage[i][j]);
+            }
+        }
+//        System.out.println("wew");
+        dstImage = midImage;
+//        System.out.println(width - (size/2));
+//        System.out.println(height - (size/2));
+        for (int i = (size / 2); i < width - (size / 2); i++) {
+//            System.out.println(i);
+            for (int j = (size / 2); j < height - (size / 2); j++) {
+//                System.out.println(j);
+                dstImage[0][i][j] = 0;
+                dstImage[1][i][j] = 0;
+                dstImage[2][i][j] = 0;
+                for (int matrixW = -(size / 2); matrixW <= (size / 2); matrixW++) {
+//                    System.out.println("wew4");
+                    for (int matrixH = -(size / 2); matrixH <= (size / 2); matrixH++) {
+                        System.out.println(matrixH);
+                        dstImage[0][i][j] += Math.round(midImage[0][i - matrixW][j-matrixH] * multSize);
+//                        System.out.println(dstImage[0][i][j]);
+//                        System.out.println((midImage[0][i - matrixW][j-matrixH] * multSize));
+//                        System.out.println(Math.round((midImage[0][i - matrixW][j-matrixH] * multSize)));
+//                        System.out.println("wew5");
+//                        System.out.println(matrixW);
+//                        System.out.println(midImage[i - matrixW][j-matrixH] * multSize);
+//                        System.out.println(midImage[i - matrixW][j-matrixH] + "||" + multSize);
+                        dstImage[1][i][j] += Math.round(midImage[1][i - matrixW][j-matrixH] * multSize);
+                        dstImage[2][i][j] += Math.round(midImage[2][i - matrixW][j-matrixH] * multSize);
+//                        System.out.println(dstImage[i][j]);
+                    }
+                }
+            }
+        }
 
-                int r = (pixel>>16) & 0xff;
-                int g = (pixel>>8) & 0xff;
-                int b = pixel & 0xff;
-                
-                pixel = (r<<16) | (g<<8) | b;
-                
+
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = (dstImage[0][i][j] << 16) | (dstImage[1][i][j] << 8)  | (dstImage[2][i][j]);
+//                int pixel =
                 img.setRGB(i, j, pixel);
             }
         }
-        
+
+//        for (int i = 0; i < width; i++) {
+//            for (int j = 0; j < height; j++) {
+//
+//                int pixel = img.getRGB(i,j);
+//
+//                int r = (pixel>>16) & 0xff;
+//                int g = (pixel>>8) & 0xff;
+//                int b = pixel & 0xff;
+//
+//                pixel = (r<<16) | (g<<8) | b;
+//
+//                img.setRGB(i, j, pixel);
+//            }
+//        }
+        BufferedImage dstI;
+
         try {
             output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
