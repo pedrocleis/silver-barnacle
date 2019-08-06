@@ -282,7 +282,7 @@ public class tela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTrocarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrocarFotoActionPerformed
-        JFileChooser fc = new JFileChooser("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens");
+        JFileChooser fc = new JFileChooser(".\\src\\pdi\\imagens");
         
         fc.showOpenDialog(jPanel1);
         this.arquivo = fc.getSelectedFile();
@@ -303,7 +303,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -325,7 +325,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -352,7 +352,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -374,7 +374,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -398,7 +398,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -420,7 +420,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File("\\Users\\HP\\Desktop\\silver-barnacle-master\\img\\imagemProcessada.jpg");
+            output = new File(".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -440,7 +440,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -462,7 +462,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -482,7 +482,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -526,7 +526,7 @@ public class tela extends javax.swing.JFrame {
         }
         
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(grayFrame, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -550,7 +550,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File(".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -582,7 +582,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File(".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -602,7 +602,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -624,7 +624,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -644,7 +644,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File(".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -674,7 +674,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File(".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -694,7 +694,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -716,7 +716,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -736,7 +736,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -758,7 +758,7 @@ public class tela extends javax.swing.JFrame {
         }
 
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(img, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -778,7 +778,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -822,7 +822,7 @@ public class tela extends javax.swing.JFrame {
         }
         
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(grayFrame, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -846,7 +846,7 @@ public class tela extends javax.swing.JFrame {
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
-            maskText = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -890,7 +890,7 @@ public class tela extends javax.swing.JFrame {
         }
         
         try {
-            output = new File ("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
             ImageIO.write(grayFrame, "jpg", output);
             ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
             foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
@@ -898,10 +898,7 @@ public class tela extends javax.swing.JFrame {
             foto.repaint();
         
             this.revalidate();
-            //ImageIcon imagemProcessada = new ImageIcon(output.getAbsolutePath());
-            //DialogImgProcessada bandaR = new DialogImgProcessada(tela.this, true, imagemProcessada);
-            //bandaR.setLocationRelativeTo(null);
-            //bandaR.setVisible(true);
+            
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -917,11 +914,11 @@ public class tela extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "O valor deve ser positivo!");
         }else{
             try {
-                //input = this.arquivo;
-                input = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
-                //ImageIO.write(img, "jpg", input);
+                
+                input = new File(".\\src\\pdi\\imagens\\imagemProcessada.jpg");
+                
                 img = ImageIO.read(input);
-                maskText = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\mask.txt");
+                maskText = new File(".\\src\\pdi\\imagens\\mask.txt");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -947,7 +944,7 @@ public class tela extends javax.swing.JFrame {
             }
 
             try {
-                output = new File("\\Users\\HP\\Desktop\\PDI\\src\\pdi\\imagens\\imagemProcessada.jpg");
+                output = new File(".\\src\\pdi\\imagens\\imagemProcessada.jpg");
                 ImageIO.write(img, "jpg", output);
                 ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
                 foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)));
