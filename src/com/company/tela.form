@@ -57,11 +57,17 @@
                           <Component id="btnConversaoRGB_YIQ_RGB" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnBandaRmono" max="32767" attributes="0"/>
-                              <Component id="btnBandaGmono" max="32767" attributes="0"/>
-                              <Component id="btnBandaBmono" max="32767" attributes="0"/>
-                              <Component id="valorContrBrilho" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnBandaRmono" max="32767" attributes="0"/>
+                                  <Component id="btnBandaGmono" max="32767" attributes="0"/>
+                                  <Component id="btnBandaBmono" max="32767" attributes="0"/>
+                                  <Component id="valorContrBrilho" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                  <Component id="btnControleBrilho" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -76,16 +82,17 @@
                                   <Component id="BandaGneg" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                   <Component id="btnBandaBcor" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                   <Component id="BandaBneg" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="btnFiltroMedia" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnFiltroSobel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="btnFiltroMediana" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                          <Component id="btnControleBrilho" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
@@ -114,7 +121,10 @@
                               <Group type="102" attributes="0">
                                   <Component id="btnBandaGmono" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnBandaBmono" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnBandaBmono" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnBandaBcor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -122,16 +132,20 @@
                                       <Component id="btnBandaGcor" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="BandaBneg" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnBandaBcor" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="BandaBneg" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="valorContrBrilho" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnControleBrilho" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="valorContrBrilho" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnFiltroMedia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnFiltroSobel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnFiltroMediana" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnControleBrilho" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -271,6 +285,24 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Insira um valor real positivo"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnFiltroMedia">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Filtro de M&#xe9;dia"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnFiltroSobel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Filtro de Sobel"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnFiltroMediana">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Filtro de Mediana"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFiltroMedianaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

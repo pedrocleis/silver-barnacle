@@ -7,10 +7,16 @@ package pdi;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -18,7 +24,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Naiara
+ * @author Naiara, Pedro e Ruan
  */
 public class tela extends javax.swing.JFrame {
     
@@ -76,6 +82,9 @@ public class tela extends javax.swing.JFrame {
         btnBandaBmono = new javax.swing.JButton();
         btnControleBrilho = new javax.swing.JButton();
         valorContrBrilho = new javax.swing.JTextField();
+        btnFiltroMedia = new javax.swing.JButton();
+        btnFiltroSobel = new javax.swing.JButton();
+        btnFiltroMediana = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,6 +190,17 @@ public class tela extends javax.swing.JFrame {
 
         valorContrBrilho.setText("Insira um valor real positivo");
 
+        btnFiltroMedia.setText("Filtro de Média");
+
+        btnFiltroSobel.setText("Filtro de Sobel");
+
+        btnFiltroMediana.setText("Filtro de Mediana");
+        btnFiltroMediana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroMedianaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,11 +221,15 @@ public class tela extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnConversaoRGB_YIQ_RGB))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnBandaRmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBandaGmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBandaBmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(valorContrBrilho))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnBandaRmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBandaGmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBandaBmono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(valorContrBrilho))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(btnControleBrilho)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -217,13 +241,14 @@ public class tela extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BandaGneg))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
                                 .addComponent(btnBandaBcor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BandaBneg))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnControleBrilho)))
+                                .addGap(8, 8, 8)
+                                .addComponent(BandaBneg))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnFiltroMedia)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnFiltroSobel))
+                            .addComponent(btnFiltroMediana))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -246,19 +271,24 @@ public class tela extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnBandaGmono)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBandaBmono))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnBandaBmono)
+                                    .addComponent(btnBandaBcor)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(BandaGneg)
                                     .addComponent(btnBandaGcor))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(BandaBneg)
-                                    .addComponent(btnBandaBcor))))
-                        .addGap(13, 13, 13)
-                        .addComponent(valorContrBrilho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnControleBrilho))
+                                .addComponent(BandaBneg)))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(valorContrBrilho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFiltroMedia)
+                            .addComponent(btnFiltroSobel))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnFiltroMediana)
+                            .addComponent(btnControleBrilho)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,8 +328,7 @@ public class tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTrocarFotoActionPerformed
 
     private void btnNegativoRGBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoRGBActionPerformed
-        
-       
+               
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -332,23 +361,16 @@ public class tela extends javax.swing.JFrame {
 
             foto.repaint();
             
-
             this.revalidate();
-            //DialogImgProcessada negativoRGB = new DialogImgProcessada(tela.this, true, imagemProcessada);
-            //negativoRGB.setLocationRelativeTo(null);
-            //negativoRGB.setVisible(true);
-            
+                        
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-        //System.out.println("asd");
     }//GEN-LAST:event_btnNegativoRGBActionPerformed
 
     private void btnBandaRcorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaRcorActionPerformed
         
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -382,10 +404,6 @@ public class tela extends javax.swing.JFrame {
             foto.repaint();
         
             this.revalidate();
-            //ImageIcon imagemProcessada = new ImageIcon(output.getAbsolutePath());
-            //DialogImgProcessada bandaR = new DialogImgProcessada(tela.this, true, imagemProcessada);
-            //bandaR.setLocationRelativeTo(null);
-            //bandaR.setVisible(true);
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -394,7 +412,6 @@ public class tela extends javax.swing.JFrame {
 
     private void btnBandaGcorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaGcorActionPerformed
         
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -436,7 +453,6 @@ public class tela extends javax.swing.JFrame {
 
     private void btnBandaBcorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaBcorActionPerformed
         
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -478,7 +494,6 @@ public class tela extends javax.swing.JFrame {
 
     private void btnBandaRmonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaRmonoActionPerformed
         
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -498,16 +513,12 @@ public class tela extends javax.swing.JFrame {
                 int g = 0 & (pixel>>8) & 0xff;
                 int b = 0 & pixel & 0xff;
                 
-                //int x = r/3;
-                //int x = ((r<<16)+0+0)/3;
-                
                 pixel = (r<<16) | (g<<8) | b;                 
                 
                 img.setRGB(i, j, pixel);
             }
         }
 
-        //BufferedImage colorFrame;
         BufferedImage grayFrame = 
         new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         
@@ -534,10 +545,6 @@ public class tela extends javax.swing.JFrame {
             foto.repaint();
         
             this.revalidate();
-            //ImageIcon imagemProcessada = new ImageIcon(output.getAbsolutePath());
-            //DialogImgProcessada bandaR = new DialogImgProcessada(tela.this, true, imagemProcessada);
-            //bandaR.setLocationRelativeTo(null);
-            //bandaR.setVisible(true);
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -546,7 +553,6 @@ public class tela extends javax.swing.JFrame {
 
     private void btnNegativoYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoYActionPerformed
        
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -598,7 +604,6 @@ public class tela extends javax.swing.JFrame {
 
     private void BandaRnegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BandaRnegActionPerformed
         
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -640,7 +645,6 @@ public class tela extends javax.swing.JFrame {
 
     private void btnConversaoRGB_YIQ_RGBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConversaoRGB_YIQ_RGBActionPerformed
        
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -690,7 +694,6 @@ public class tela extends javax.swing.JFrame {
 
     private void BandaGnegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BandaGnegActionPerformed
         
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -732,7 +735,6 @@ public class tela extends javax.swing.JFrame {
 
     private void BandaBnegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BandaBnegActionPerformed
        
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -774,7 +776,6 @@ public class tela extends javax.swing.JFrame {
 
     private void btnBandaGmonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaGmonoActionPerformed
         
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -794,16 +795,12 @@ public class tela extends javax.swing.JFrame {
                 int g = 255 & (pixel>>8) & 0xff;
                 int b = 0 & pixel & 0xff;
                 
-                //int x = r/3;
-                //int x = ((r<<16)+0+0)/3;
-                
                 pixel = (r<<16) | (g<<8) | b;                 
                 
                 img.setRGB(i, j, pixel);
             }
         }
 
-        //BufferedImage colorFrame;
         BufferedImage grayFrame = 
         new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         
@@ -830,10 +827,6 @@ public class tela extends javax.swing.JFrame {
             foto.repaint();
         
             this.revalidate();
-            //ImageIcon imagemProcessada = new ImageIcon(output.getAbsolutePath());
-            //DialogImgProcessada bandaR = new DialogImgProcessada(tela.this, true, imagemProcessada);
-            //bandaR.setLocationRelativeTo(null);
-            //bandaR.setVisible(true);
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -842,7 +835,6 @@ public class tela extends javax.swing.JFrame {
 
     private void btnBandaBmonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBandaBmonoActionPerformed
         
-
         try {
             input = this.arquivo;
             img = ImageIO.read(input);
@@ -862,16 +854,12 @@ public class tela extends javax.swing.JFrame {
                 int g = 0 & (pixel>>8) & 0xff;
                 int b = 255 & pixel & 0xff;
                 
-                //int x = r/3;
-                //int x = ((r<<16)+0+0)/3;
-                
                 pixel = (r<<16) | (g<<8) | b;
                 
                 img.setRGB(i, j, pixel);
             }
         }
 
-        //BufferedImage colorFrame;
         BufferedImage grayFrame = 
         new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         
@@ -906,8 +894,7 @@ public class tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBandaBmonoActionPerformed
 
     private void btnControleBrilhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControleBrilhoActionPerformed
-        
-        
+                
         float c = Float.parseFloat(valorContrBrilho.getText());
         
         if(c < 0){
@@ -959,6 +946,71 @@ public class tela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnControleBrilhoActionPerformed
 
+    private void btnFiltroMedianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroMedianaActionPerformed
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        ArrayList<Integer> list = null;
+        
+        try {
+            Scanner scanner = new Scanner(maskText);
+            list = new ArrayList<>();
+            while(scanner.hasNext()){
+                if(scanner.hasNextInt()){
+                    list.add(scanner.nextInt());
+                } else {
+                    scanner.next();
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+                
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        int maskWidth = list.get(0);
+        int maskHeight = list.get(0);
+        
+       System.out.println(list.get(0));
+        
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                
+                int pixel = img.getRGB(i,j);
+
+                int r = (pixel>>16) & 0xff;
+                int g = (pixel>>8) & 0xff;
+                int b = pixel & 0xff;
+                
+                pixel = (r<<16) | (g<<8) | b;
+                
+                img.setRGB(i, j, pixel);
+            }
+        }
+        
+        try {
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+        
+            foto.repaint();
+        
+            this.revalidate();
+            
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnFiltroMedianaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1006,6 +1058,9 @@ public class tela extends javax.swing.JFrame {
     private javax.swing.JButton btnBandaRmono;
     private javax.swing.JButton btnControleBrilho;
     private javax.swing.JButton btnConversaoRGB_YIQ_RGB;
+    private javax.swing.JButton btnFiltroMedia;
+    private javax.swing.JButton btnFiltroMediana;
+    private javax.swing.JButton btnFiltroSobel;
     private javax.swing.JButton btnNegativoRGB;
     private javax.swing.JButton btnNegativoY;
     private javax.swing.JButton btnTrocarFoto;
