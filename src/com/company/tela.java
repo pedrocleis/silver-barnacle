@@ -193,6 +193,7 @@ public class tela extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnTrocarFotoActionPerformed
+
     private void btnNegativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNegativoActionPerformed
 
         BufferedImage img = null;
@@ -466,7 +467,7 @@ public class tela extends javax.swing.JFrame {
             for (int j = 0; j < height; j++) {
                 int pixel = img.getRGB(i, j);
 
-                int r = 255 - (pixel >> 16) & 0xff;
+                int r = (pixel >> 16) & 0xff;
                 int g = 0;
                 int b = 0;
 
@@ -516,7 +517,7 @@ public class tela extends javax.swing.JFrame {
                 int pixel = img.getRGB(i, j);
 
                 int r = 0;
-                int g = 255 - (pixel >> 8) & 0xff;
+                int g = (pixel >> 8) & 0xff;
                 int b = 0;
 
                 pixel = (r << 16) | (g<<8) | b;
@@ -564,7 +565,7 @@ public class tela extends javax.swing.JFrame {
 
                 int r = 0;
                 int g = 0;
-                int b = 255 - pixel & 0xff;
+                int b = pixel & 0xff;
 
                 pixel = (r << 16) | (g << 8) | b;
                 img.setRGB(i, j, pixel);
