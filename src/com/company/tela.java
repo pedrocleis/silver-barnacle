@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -957,7 +958,135 @@ public class tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnControleBrilhoActionPerformed
 
     private void btnFiltroMedianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroMedianaActionPerformed
-        
+        try {
+            input = this.arquivo;
+            img = ImageIO.read(input);
+            maskText = new File (".\\src\\pdi\\imagens\\mask.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        ArrayList<Integer> list = null;
+
+        try {
+            Scanner scanner = new Scanner(maskText);
+            list = new ArrayList<>();
+            while(scanner.hasNext()){
+                if(scanner.hasNextInt()){
+                    list.add(scanner.nextInt());
+                } else {
+                    scanner.next();
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        int size = list.get(0);
+        double multSize = 1/((double)size * size);
+//        System.out.println(1/9.0);
+//        System.out.println(size * size);
+//        System.out.println(multSize);
+
+//        System.out.println(list.get(0));
+        int[][] midImage = new int[width][height];
+        int[][] dstImage = new int[width][height];
+        ArrayList<Integer> listMatriz = new ArrayList<>();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                midImage[i][j] = img.getRGB(i,j);
+//                System.out.println(midImage[0][i][j]);
+//                midImage[i][j] = img.getRGB(i,j) >> 8 & 0xff;
+//                System.out.println(midImage[1][i][j]);
+//                midImage[i][j] = img.getRGB(i,j) & 0xff;
+//                System.out.println(midImage[2][i][j]);
+//                System.out.println(midImage[i][j]);
+            }
+        }
+//        System.out.println("wew");
+        dstImage = midImage;
+//        System.out.println(width - (size/2));
+//        System.out.println(height - (size/2));
+        for (int i = (size / 2); i < width - (size / 2); i++) {
+//            System.out.println("wew1");
+            for (int j = (size / 2); j < height - (size / 2); j++) {
+//                System.out.println("wew2");
+//                System.out.println(j);
+                dstImage[i][j] = 0;
+//                dstImage[1][i][j] = 0;
+//                dstImage[2][i][j] = 0;
+                for (int matrixW = -(size / 2); matrixW <= (size / 2); matrixW++) {
+//                    System.out.println("wew3");
+                    for (int matrixH = -(size / 2); matrixH <= (size / 2); matrixH++) {
+//                        System.out.println(matrixH);
+                        listMatriz.add(midImage[i-matrixW][j-matrixH]);
+//                        dstImage[0][i][j] += Math.round(midImage[0][i - matrixW][j-matrixH] * multSize);
+                        System.out.println(i + " | " + j + " | " + matrixW + " | " + matrixH);
+//                        System.out.println((midImage[0][i - matrixW][j-matrixH] * multSize));
+//                        System.out.println(Math.round((midImage[0][i - matrixW][j-matrixH] * multSize)));
+//                        System.out.println("wew4");
+//                        System.out.println(matrixW);
+//                        System.out.println(midImage[i - matrixW][j-matrixH] * multSize);
+//                        System.out.println(midImage[i - matrixW][j-matrixH] + "||" + multSize);
+//                        dstImage[1][i][j] += Math.round(midImage[1][i - matrixW][j-matrixH] * multSize);
+//                        dstImage[2][i][j] += Math.round(midImage[2][i - matrixW][j-matrixH] * multSize);
+//                        System.out.println(dstImage[i][j]);
+                    }
+                }
+                int meioList = listMatriz.size() / 2;
+                Collections.sort(listMatriz);
+                dstImage[i][j] = listMatriz.get(meioList);
+                listMatriz.clear();
+            }
+        }
+
+
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+//                int pixel = (dstImage[0][i][j] << 16) | (dstImage[1][i][j] << 8)  | (dstImage[2][i][j]);
+//                int pixel =
+                img.setRGB(i, j, dstImage[i][j]);
+            }
+        }
+
+//        for (int i = 0; i < width; i++) {
+//            for (int j = 0; j < height; j++) {
+//
+//                int pixel = img.getRGB(i,j);
+//
+//                int r = (pixel>>16) & 0xff;
+//                int g = (pixel>>8) & 0xff;
+//                int b = pixel & 0xff;
+//
+//                pixel = (r<<16) | (g<<8) | b;
+//
+//                img.setRGB(i, j, pixel);
+//            }
+//        }
+        BufferedImage dstI;
+
+        try {
+            output = new File (".\\src\\pdi\\imagens\\imagemProcessada.jpg");
+            ImageIO.write(img, "jpg", output);
+            ImageIcon imagem = new ImageIcon(output.getAbsolutePath());
+            foto.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(foto.getWidth(),foto.getHeight(), Image.SCALE_DEFAULT)));
+
+            foto.repaint();
+
+            this.revalidate();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }//GEN-LAST:event_btnFiltroMedianaActionPerformed
 
     private void btnFiltroMediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroMediaActionPerformed
@@ -1024,7 +1153,7 @@ public class tela extends javax.swing.JFrame {
                 for (int matrixW = -(size / 2); matrixW <= (size / 2); matrixW++) {
 //                    System.out.println("wew4");
                     for (int matrixH = -(size / 2); matrixH <= (size / 2); matrixH++) {
-                        System.out.println(matrixH);
+//                        System.out.println(matrixH);
                         dstImage[0][i][j] += Math.round(midImage[0][i - matrixW][j-matrixH] * multSize);
 //                        System.out.println(dstImage[0][i][j]);
 //                        System.out.println((midImage[0][i - matrixW][j-matrixH] * multSize));
