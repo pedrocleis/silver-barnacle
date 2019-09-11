@@ -1,0 +1,15 @@
+Neste trabalho, a DCT (direta e inversa) deve ser desenvolvida utilizando as equações estudadas em sala de aula, sem o uso de bibliotecas prontas para este fim.
+
+1 Dado um sinal de áudio s com N amostras, desenvolva uma aplicação para:
+
+ a) Exibir a DCT de s e o valor do nível DC;
+
+b) Encontrar uma aproximação ? de s obtida preservando os n (parâmetro inteiro no intervalo [0, N-1]) coeficientes AC (da DCT) mais importantes de s e zerando os demais coeficientes AC. Para audição, o sinal resultante deve ser multiplicado por uma constante c tal que (volume de ?) = (volume de s)
+
+2 Dada uma imagem I de dimensões RxC, desenvolva uma aplicação para:
+
+a) Exibir a DCT de s, sem o nível DC, e o valor do nível DC;
+
+b) Encontrar e exibir uma aproximação de I obtida preservando os n coeficientes AC (da DCT) mais importantes de I e zerando os demais. O parâmetro n é um inteiro no intervalo [0, RxC-1].
+
+3 Desenvolva um compactador/expansor de frequências para sinais de áudio, em que Xt[round(k*c)] = X[k], c real, c > 0. A dimensão do vetor Xt deve ser igual à do vetor X.
