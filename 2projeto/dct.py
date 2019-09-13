@@ -18,10 +18,10 @@ def dct(row):
 
     return result
 
-def dcdct(row):
-    N = len(row)
-    result = (1/math.sqrt(N)) * (????)
-    return result
+# def dcdct(row):
+#     N = len(row)
+#     result = (1/math.sqrt(N)) * (????)
+#     return result
 
 
 def dct2d(img):
@@ -94,7 +94,7 @@ def plot(d):
 
 if __name__ == "__main__":
 
-    filename = "lena128cor.png"
+    filename = "lena.jpg"
     img = cv2.imread(filename)
     n = int(2000)
     b,g,r = cv2.split(img)
